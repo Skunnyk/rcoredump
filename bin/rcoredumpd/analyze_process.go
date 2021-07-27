@@ -97,7 +97,7 @@ func (p *analyzeProcess) extractStackTrace() {
 	case LangC:
 		cmd = fmt.Sprintf("gdb --nx --command %s/gdb.cmd --batch %s %s", p.dataDir, p.executable.Name(), p.file.Name())
 	case LangGo:
-		cmd = fmt.Sprintf("dlv core %s %s --init %s/delve.cmd", p.executable.Name(), p.file.Name(), p.dataDir)
+		cmd = fmt.Sprintf("dlv --allow-non-terminal-interactive=true core %s %s --init %s/delve.cmd", p.executable.Name(), p.file.Name(), p.dataDir)
 	default:
 		p.err = wrap(fmt.Errorf(`unhandled lang %s`, p.core.Lang), "extracting stack trace")
 		return
